@@ -1,5 +1,5 @@
 "use client";
-import { ElementRef, useRef, useState } from "react";
+import { ElementRef, useEffect, useRef, useState } from "react";
 
 import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { useMediaQuery } from "usehooks-ts";
@@ -15,6 +15,24 @@ export const Navigation = () => {
   const navbarRef = useRef<ElementRef<"div">>(null);
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
+  console.log("pathname: " + pathname);
+
+  // This useEffect will take effect when the mobile size is reached
+  // If thats the case then the sidebar will take the full size of the window (by collapsing)
+  useEffect(() => {
+    if (isMobile) {
+      collapse();
+    } else {
+      resetWidth();
+    }
+  }, [isMobile]);
+
+  // This useEffect will take effect on the pathname and the mobile size.
+  useEffect(() => {
+    if (isMobile) {
+      collapse();
+    }
+  }, [pathname, isMobile]);
 
   const handleMouseDown = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -67,6 +85,20 @@ export const Navigation = () => {
     }
   };
 
+  // collapse collapses the sidebar when clicked on left arrow button
+  const collapse = () => {
+    if (sidebarRef.current && sidebarRef.current) {
+      setIsCollapsed(true);
+      setIsResetting(true);
+
+      sidebarRef.current.style.width = "0";
+      navbarRef.current?.style.setProperty("width", "100%");
+      navbarRef.current?.style.setProperty("left", "0");
+
+      setTimeout(() => setIsResetting(false), 300);
+    }
+  };
+
   return (
     <>
       <aside
@@ -79,6 +111,7 @@ export const Navigation = () => {
         )}
       >
         <div
+          onClick={collapse}
           role="button"
           className={cn(
             "h-6 w-6 text-muted-foreground rounded-sm\
@@ -114,7 +147,11 @@ export const Navigation = () => {
       >
         <nav className="bg-transparent px-3 py-2 w-full">
           {isCollapsed && (
-            <MenuIcon role="button" className="h-6 w-6 text-muted-foreground" />
+            <MenuIcon
+              onClick={resetWidth}
+              role="button"
+              className="h-6 w-6 text-muted-foreground"
+            />
           )}
         </nav>
       </div>
