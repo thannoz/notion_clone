@@ -22,10 +22,6 @@ const Documents = () => {
     });
   };
 
-  // const onFetch = () => {
-  //   const promise =
-  // }
-
   return (
     <div className="h-full flex flex-col items-center justify-center space-y-4">
       <Image

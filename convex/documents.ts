@@ -11,7 +11,7 @@ export const get = query({
       throw new Error("Not authenticated");
     }
 
-    const documents = ctx.db.query("documents");
+    const documents = ctx.db.query("documents").collect();
     return documents;
   },
 });
