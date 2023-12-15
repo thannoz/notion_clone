@@ -4,6 +4,7 @@ import { FC } from "react";
 import { ChevronDown, ChevronRight, LucideIcon } from "lucide-react";
 import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ItemProps {
   onClick: () => void;
@@ -64,6 +65,18 @@ export const Item: FC<ItemProps> = ({
           <span className="text-xs">⌘</span>K
         </kbd>
       )}
+    </div>
+  );
+};
+
+Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
+  return (
+    <div
+      style={{
+        paddingLeft: level ? `${level * 12 + 25}px` : "12px",
+      }}
+    >
+      <Skeleton></Skeleton>
     </div>
   );
 };
