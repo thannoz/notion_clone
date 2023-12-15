@@ -19,7 +19,7 @@ interface ItemProps {
   expanded?: boolean;
 }
 
-export const Item: FC<ItemProps> = ({
+export const Item = ({
   label,
   onClick,
   icon: Icon,
@@ -30,7 +30,7 @@ export const Item: FC<ItemProps> = ({
   level = 0,
   onExpand,
   expanded,
-}) => {
+}: ItemProps) => {
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
   return (
@@ -75,8 +75,10 @@ Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
       style={{
         paddingLeft: level ? `${level * 12 + 25}px` : "12px",
       }}
+      className="flex gap-x-2 py-[3px]"
     >
-      <Skeleton></Skeleton>
+      <Skeleton className="h-4 w-4" />
+      <Skeleton className="h-4 w-[30%]" />
     </div>
   );
 };
