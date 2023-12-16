@@ -3,7 +3,7 @@ import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { Doc, Id } from "./_generated/dataModel";
 
-export const GetSidebar = query({
+export const getSidebar = query({
   args: {
     parentDocument: v.optional(v.id("documents")),
   },

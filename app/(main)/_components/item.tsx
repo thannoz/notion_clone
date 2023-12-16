@@ -1,6 +1,5 @@
 "use client";
 
-import { FC } from "react";
 import { ChevronDown, ChevronRight, LucideIcon } from "lucide-react";
 import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
