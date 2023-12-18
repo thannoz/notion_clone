@@ -30,6 +30,10 @@ export const Item = ({
   onExpand,
   expanded,
 }: ItemProps) => {
+  const handleExpand = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    console.log("handleExpand");
+  };
+
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
   return (
